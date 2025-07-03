@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lagu</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #9fd3fc, #92baff);
+      color: #333;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      padding: 30px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lyrics {
+      margin: 30px auto;
+      max-width: 600px;
+      font-size: 18px;
+      line-height: 1.6;
+      min-height: 300px;
+      user-select: none;
+      white-space: pre-wrap;
+      background: #ffffffcc; /* putih transparan agar teks jelas */
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    #heart {
+      font-size: 60px;
+      color: red;
+      animation: pulse 2s infinite;
+      margin-bottom: 20px;
+      user-select: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+    }
+
+    button {
+      background-color: #4d8df5;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 18px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin: 10px 5px 0 5px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #376ecc;
+    }
+
+    #audioControls {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div id="heart">❤️</div>
+  <div id="lyrics"></div>
+
+  <div>
+    <button id="btnPause">Pause Teks</button>
+    <button id="btnPlay" disabled>Play Teks</button>
+    <button onclick="location.href='home.html'">Kembali ke Beranda</button>
+  </div>
+
+  <div id="audioControls">
+    <audio id="audio" src="Gellen Martadinata - Selamat Ulang Tahun ( Official Audio _ Lyric )(MP3_160K).mp3"></audio>
+    <button id="btnAudioPlay">Play Lagu</button>
+    <button id="btnAudioPause" disabled>Pause Lagu</button>
+  </div>
+
+  <script>
+    const text = `Hari ini hari ulang tahunmu
+Bertambah satu tahun usiamu
+Ku doakan bahagia selalu untukmu
+Tercapai segala cita-citamu
+
+Selamat ulang tahun ku ucapkan untukmu
+Semoga bahagia kan mengiringi langkahmu
+Tiada yang bisa ku beri
+Hanyalah doa dan rasa cinta
+Yang tulus dariku tuk dirimu
+
+Selamat ulang tahun ku ucapkan untukmu
+Semoga bahagia kan mengiringi langkahmu
+Tiada yang bisa ku beri
+Hanyalah doa dan rasa cinta
+Yang tulus dariku tuk dirimu
+
+Hanyalah doa dan cinta tuk dirimu`;
+
+    const container = document.getElementById("lyrics");
+    const btnPause = document.getElementById("btnPause");
+    const btnPlay = document.getElementById("btnPlay");
+
+    let i = 0;
+    let isPaused = false;
+    let timeoutId;
+
+    function typeWriter() {
+      if (i < text.length && !isPaused) {
+        container.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+        i++;
+        timeoutId = setTimeout(typeWriter, 150); // kecepatan ketik dikurangi agar tidak terlalu cepat
+      }
+    }
+
+    btnPause.addEventListener('click', () => {
+      isPaused = true;
+      btnPause.disabled = true;
+      btnPlay.disabled = false;
+      clearTimeout(timeoutId);
+    });
+
+    btnPlay.addEventListener('click', () => {
+      if (i < text.length) {
+        isPaused = false;
+        btnPause.disabled = false;
+        btnPlay.disabled = true;
+        typeWriter();
+      }
+    });
+
+    typeWriter();
+
+    // Audio controls
+    const audio = document.getElementById("audio");
+    const btnAudioPlay = document.getElementById("btnAudioPlay");
+    const btnAudioPause = document.getElementById("btnAudioPause");
+
+    btnAudioPlay.addEventListener('click', () => {
+      audio.play();
+      btnAudioPlay.disabled = true;
+      btnAudioPause.disabled = false;
+    });
+
+    btnAudioPause.addEventListener('click', () => {
+      audio.pause();
+      btnAudioPlay.disabled = false;
+      btnAudioPause.disabled = true;
+    });
+
+    audio.addEventListener('ended', () => {
+      btnAudioPlay.disabled = false;
+      btnAudioPause.disabled = true;
+    });
+  </script>
+</body>
+</html>

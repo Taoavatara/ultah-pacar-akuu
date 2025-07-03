@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tebak</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom right, #9fd3fc, #92baff);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header, footer {
+      background: #ffffffcc;
+      text-align: center;
+      padding: 1em;
+      border-bottom: 3px solid #b6d4ff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    footer {
+      border-top: 2px solid #b6d4ff;
+      margin-top: auto;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 1em 0;
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      flex-wrap: wrap;
+    }
+    nav a {
+      text-decoration: none;
+      background-color: #4d8df5;
+      color: white;
+      padding: 0.5em 1em;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #376ecc;
+    }
+    main {
+      flex: 1;
+      padding: 2em 1em;
+      max-width: 400px;
+      margin: auto;
+      text-align: center;
+      background: #ffffffcc;
+      border-radius: 15px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 0.7em;
+      font-size: 1.2em;
+      border-radius: 10px;
+      border: 2px solid #4d8df5;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    button {
+      background-color: #4d8df5;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.7em 1em;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #376ecc;
+    }
+    #hasil {
+      margin-top: 1.5em;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #2357a3;
+      min-height: 2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tebak Kapan Jadian ❤️</h1>
+    <nav>
+      <ul>
+        <li><a href="games.html">Kembali ke Menu Games</a></li>
+        <li><a href="home.html">Beranda</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <p>Coba tebak tanggal jadian kita! (1 - 31)</p>
+    <input type="number" id="inputTanggal" min="1" max="31" placeholder="Masukkan tanggal" />
+    <button id="cekBtn">Cek Tebakan</button>
+    <div id="hasil"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Website untuk Afifah dari pacar tercinta ❤️</p>
+  </footer>
+
+  <script>
+    const targetTanggal = 22; // 22 Oktober 2024
+    const inputTanggal = document.getElementById('inputTanggal');
+    const cekBtn = document.getElementById('cekBtn');
+    const hasil = document.getElementById('hasil');
+
+    cekBtn.addEventListener('click', () => {
+      const guess = Number(inputTanggal.value);
+      if (!guess || guess < 1 || guess > 31) {
+        hasil.textContent = "Masukkan tanggal antara 1 sampai 31 ya!";
+        return;
+      }
+      if (guess === targetTanggal) {
+        hasil.textContent = "🎉 Benar sekali! Jadian kita tanggal 22 Oktober 2024 ❤️";
+        cekBtn.disabled = true;
+        inputTanggal.disabled = true;
+      } else if (guess < targetTanggal) {
+        hasil.textContent = `Terlalu kecil! Coba angka lebih besar dari ${guess}`;
+      } else {
+        hasil.textContent = `Terlalu besar! Coba angka lebih kecil dari ${guess}`;
+      }
+      inputTanggal.value = '';
+      inputTanggal.focus();
+    });
+  </script>
+</body>
+</html>

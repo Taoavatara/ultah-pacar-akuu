@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Games - Pilih Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom right, #9fd3fc, #92baff);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    header, footer {
+      background: #ffffffcc;
+      width: 100%;
+      text-align: center;
+      padding: 1em;
+      border-bottom: 3px solid #b6d4ff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    footer {
+      border-top: 2px solid #b6d4ff;
+      margin-top: auto;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5em;
+      max-width: 400px;
+      width: 90%;
+      margin: 2em auto;
+      text-align: center;
+    }
+    main h1 {
+      margin-bottom: 0.5em;
+      color: #2357a3;
+    }
+    main a {
+      display: block;
+      background-color: #4d8df5;
+      color: white;
+      padding: 1em;
+      border-radius: 15px;
+      font-size: 1.3em;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    main a:hover {
+      background-color: #376ecc;
+    }
+    /* Tombol Kembali */
+    .btn-back {
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      border: none;
+      color: white;
+      padding: 12px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(37, 117, 252, 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      margin: 20px auto;
+      display: block;
+      max-width: 200px;
+      text-align: center;
+    }
+    .btn-back:hover {
+      background: linear-gradient(45deg, #2575fc, #6a11cb);
+      box-shadow: 0 6px 15px rgba(106, 17, 203, 0.8);
+    }
+    .btn-back:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Selamat datang di Games untuk Afifah ❤️</h1>
+  </header>
+
+  <!-- Tombol Kembali ke Beranda -->
+  <button class="btn-back" onclick="location.href='home.html'">Kembali ke Beranda</button>
+
+  <main>
+    <h1>Pilih Game</h1>
+    <a href="tic-tac-toe.html">1. Tic Tac Toe</a>
+    <a href="tebak-jadian.html">2. Tebak Kapan Jadian</a>
+    <a href="quiz-cinta.html">3. Quiz Cinta</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Website untuk Afifah dari pacar tercinta ❤️</p>
+  </footer>
+</body>
+</html>

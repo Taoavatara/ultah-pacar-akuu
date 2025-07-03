@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz Cinta</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom right, #9fd3fc, #92baff);
+      color: #333;
+      margin: 0;
+      padding: 2em;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      color: #2357a3;
+      margin-bottom: 1em;
+    }
+    .quiz-container {
+      background: #ffffffcc;
+      padding: 2em;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .question {
+      font-size: 1.3em;
+      margin-bottom: 1em;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5em;
+    }
+    .options li {
+      margin: 0.5em 0;
+    }
+    button {
+      background-color: #4d8df5;
+      color: white;
+      border: none;
+      padding: 0.7em 1.5em;
+      font-size: 1em;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #376ecc;
+    }
+    #result {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-top: 1em;
+      color: #2357a3;
+      min-height: 2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz Cinta untuk Afifah ❤️</h1>
+  <div class="quiz-container">
+    <div id="question" class="question"></div>
+    <ul id="options" class="options"></ul>
+    <button id="nextBtn">Jawab</button>
+    <div id="result"></div>
+  </div>
+
+<script>
+  const quizData = [
+    {
+      question: "Kapan tanggal jadian kita?",
+      options: ["22 Oktober 2024", "11 Juli 2008", "1 Januari 2025", "14 Februari 2025"],
+      answer: 0
+    },
+    {
+      question: "Apa warna favorit Afifah?",
+      options: ["Merah", "Biru", "Hijau", "Kuning"],
+      answer: 1
+    },
+    {
+      question: "Apa makanan kesukaan Afifah?",
+      options: ["Sushi", "Nasi Goreng", "Piza", "Bakso"],
+      answer: 3
+    },
+    {
+      question: "Apa nama panggilan sayang untuk Afifah?",
+      options: ["Sayang", "Afif", "Cinta", "Honey"],
+      answer: 0
+    },
+    {
+      question: "Di mana pertama kali kita bertemu?",
+      options: ["Sekolah", "Kafe", "Gereja", "Mall"],
+      answer: 2
+    }
+  ];
+
+  let currentQuestion = 0;
+  let score = 0;
+  const questionEl = document.getElementById('question');
+  const optionsEl = document.getElementById('options');
+  const nextBtn = document.getElementById('nextBtn');
+  const resultEl = document.getElementById('result');
+
+  function loadQuestion() {
+    resultEl.textContent = "";
+    nextBtn.textContent = "Jawab";
+    const q = quizData[currentQuestion];
+    questionEl.textContent = q.question;
+    optionsEl.innerHTML = "";
+    q.options.forEach((option, i) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <label>
+          <input type="radio" name="option" value="${i}" />
+          ${option}
+        </label>
+      `;
+      optionsEl.appendChild(li);
+    });
+  }
+
+  function getSelected() {
+    const selected = document.querySelector('input[name="option"]:checked');
+    return selected ? Number(selected.value) : undefined;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    const selected = getSelected();
+    if (selected === undefined) {
+      resultEl.textContent = "Pilih jawaban dulu ya!";
+      return;
+    }
+    const correctAnswer = quizData[currentQuestion].answer;
+    if (selected === correctAnswer) {
+      score++;
+      resultEl.textContent = "Benar! 👍";
+    } else {
+      resultEl.textContent = `Salah! Jawaban benar: "${quizData[currentQuestion].options[correctAnswer]}"`;
+    }
+    nextBtn.textContent = currentQuestion === quizData.length -1 ? "Lihat Skor" : "Soal Berikutnya";
+    // Nonaktifkan pilihan setelah jawab
+    document.querySelectorAll('input[name="option"]').forEach(input => input.disabled = true);
+
+    nextBtn.onclick = () => {
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        showScore();
+      }
+      nextBtn.onclick = null; // reset event handler
+    }
+  });
+
+  function showScore() {
+    questionEl.textContent = `Quiz selesai! Skor kamu: ${score} dari ${quizData.length}`;
+    optionsEl.innerHTML = "";
+    nextBtn.style.display = "none";
+    resultEl.textContent = "";
+  }
+
+  loadQuestion();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Ulang Tahun Pacarnya Jetz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <h1>Masuk dulu ya 🥰</h1>
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" placeholder="Contoh: Siti Nur Afifah" />
+
+    <label for="tgl">Tanggal Lahir:</label>
+    <input type="date" id="tgl" />
+
+    <button onclick="cekLogin()">Masuk</button>
+    <p class="error" id="errorMsg"></p>
+  </div>
+
+  <script>
+    function cekLogin() {
+      const namaInput = document.getElementById('nama').value.trim().toLowerCase();
+      const tglInput = document.getElementById('tgl').value;
+      const errorMsg = document.getElementById('errorMsg');
+
+      // Format yang diharapkan: YYYY-MM-DD
+      const validNama = "siti nur afifah";
+      const validTgl = "2008-07-11";
+
+      if (namaInput === validNama && tglInput === validTgl) {
+        window.location.href = "home.html";
+      } else {
+        errorMsg.textContent = "Nama atau tanggal lahir salah 😢 coba lagi yaa";
+      }
+    }
+  </script>
+</body>
+</html>
